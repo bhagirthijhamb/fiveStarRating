@@ -30,8 +30,43 @@
 
         #message {
             font-size: 20px;
+        }        
+
+        .hovered-stars {
+            color: #ffcc36;
+        }
+
+        .clicked-stars {
+            color: sandybrown;
         }
     </style>
+
+    <script>
+        $(document).ready(function () {
+            // yelow stars on hover
+            $('li').mouseover(function () {
+                const current = $(this);
+                // console.log(current);
+                $('li').each(function(index) {
+                    $(this).addClass('hovered-stars');
+                    if(index === current.index()){
+                        return false;
+                    }
+                })
+            });
+            // remove yellow color when not hovered
+            $('li').mouseleave(function(){
+                $('li').removeClass('hovered-stars')
+            });
+
+            // add sandybrown color on click
+            $('li').click(function(){
+                $('li').removeClass('clicked-stars');
+                $('.hovered-stars').addClass('clicked-stars');
+                $('#message').html('Thanks! You have rated this ' + $('.clicked-stars').length + ' star(s).')
+            });
+        });
+    </script>
 </head>
 <body>
     <div id="container">
